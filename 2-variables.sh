@@ -1,6 +1,6 @@
 #!/bin/bin
-name1= shabeena
-name2= shabbu
+name1=shabeena
+name2=shabbu
 echo "hi $name1"
 echo "hi $name2"
 echo "how r u $name1"
