@@ -5,7 +5,7 @@
 
 USERID=$(id -u)
 
-if [ $USERID -eq 0]
+if [$USERID -eq 0]
 then 
  echo "you are a super user"
 else 
