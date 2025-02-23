@@ -11,4 +11,7 @@ then
 else 
  echo "please run this script by super user"
 fi
+
 yum install mysql -y
+
+echo "is script proceeding?"
