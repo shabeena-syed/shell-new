@@ -8,7 +8,7 @@ USERID=$(id -u)
 if [$USERID -eq 0]
 then 
  echo "you are a super user"
-fi
-yum install mysql -y
+fi 
+ dnf install mysql -y
 
-echo "is script proceeding?"
+ echo "is script proceeding?"
