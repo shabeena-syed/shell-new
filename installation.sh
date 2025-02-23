@@ -8,11 +8,7 @@ USERID=$(id -u)
 if [$USERID -eq 0]
 then 
  echo "you are a super user"
-else 
- echo "please run this script by super user"
- exit 1 
 fi
-
 yum install mysql -y
 
 echo "is script proceeding?"
