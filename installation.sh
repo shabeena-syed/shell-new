@@ -4,14 +4,20 @@
 #if id is 0 super zero super user if not super user
 
 USERID=$(id -u)
-validate(){
-    echo "exit status:$?"
-    echo "what are u doing:$1"
+VALIDATE(){
+ echo "exit status: $1"
+ echo "what are u doing: $2"
 }
 
-if [$USERID -eq 0]
+if [ $USERID -eq 0 ]
+then
+ echo"please run this script with root user"
+else
+ echo "you are super user"
+fi
+
 dnf install mysql -y
-validate $? installing mysql
+VALIDATE $? "installing mysql"
 dnf install git -y
-validate $? installing git 
-echo "is script proceeding?"
+VALIDATE $? "installing git" 
+
