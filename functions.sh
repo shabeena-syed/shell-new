@@ -7,11 +7,20 @@
 # block of code is passed by using the functions
 
 USERID=$(id -u)
+TIMESTAMP=$(date +%F-%H-%M)
+SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
+LOGFILE=/tmp/$SCRIPT_NAME-$TIMESTAMP.log
+R="\e[31m"
+
+echo "script started executing  at:$TIMESTAMP"
+
 VALIDATE(){
    if [ $1 -ne 0 ]
    then
-    echo "$2....FAILED"
+    echo -e "$2....$R FAILED $N"
     exit 1
+    else
+    echo -e "$2....$G SUCEESS $N"
    fi
 }
    
