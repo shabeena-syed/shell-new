@@ -11,4 +11,5 @@ fi
 for i in $@
 do
   echo "package to install: $i"
+  yum list installed $i 
 done
