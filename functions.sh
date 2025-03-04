@@ -32,5 +32,5 @@ then
 else 
   echo "you are super user"
 fi
-yum install mysql -y
+yum install mysql -y &>>$LOGFILE
 VALIDATE $? "installing mysql"
