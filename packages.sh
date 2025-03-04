@@ -2,6 +2,9 @@
 USERID=$(id -u)
 TIMESTAMP=$(date +%F-%M-%S)
 LOGFILE=/tmp/$SCRIPT_NAME-$TIMESTAMP.log
+R="\e[31m"
+G="\e[35m"
+N="\e[0m"
 VALIDATE() {
   if [ $1 -ne 0 ]; then 
     echo "$2..... failure"
@@ -25,7 +28,7 @@ do
   yum list installed $i &>>$LOGFILE
   if [ $? -eq 0 ]
   then
-    echo "$i already installed...skipping"
+    echo -e "$i already installed...$R skipping $N"
   else
     echo "$i not installed.. need to install"
   fi
