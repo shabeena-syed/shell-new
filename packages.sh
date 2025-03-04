@@ -7,10 +7,10 @@ G="\e[35m"
 N="\e[0m"
 VALIDATE() {
   if [ $1 -ne 0 ]; then 
-    echo "$2..... failure"
+    echo -e "$2..... $R failure $N"
     exit 1
   else
-    echo "$2......success"
+    echo "$2......$G success $N"
   fi
 }
 
@@ -30,6 +30,7 @@ do
   then
     echo -e "$i already installed...$R skipping $N"
   else
-    echo "$i not installed.. need to install"
+    dnf install $i -y &>>$LOGFILE
+    VALIDATE $? "instaling $i"
   fi
 done
