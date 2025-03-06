@@ -41,6 +41,8 @@ VALIDATE(){
  else
   echo -e "expense user is alrady created.... $G SKIPPING $N"
  fi
+ mkdir /
+ VALIDATE $? "creating app directory"
 
 
 
