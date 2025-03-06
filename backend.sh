@@ -6,6 +6,9 @@ LOGFILE=/tmp/$SCRIPT_NAME-$TIMESTAMP.log
 R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
+echo "enter the DB password"
+read -s mysql_root_Password
+
 
  if [ $USERID -ne 0 ]
  then 
@@ -36,26 +39,41 @@ VALIDATE(){
  id expense &>>LOGFILE
  if [ $? -ne 0 ]
  then 
-  useradd expense
+  useradd expense  &>>LOGFILE
   VALIDATE $? "adding user expense"
  else
   echo -e "expense user is alrady created.... $G SKIPPING $N"
  fi
- mkdir -p /app
+ mkdir -p /app  &>>LOGFILE
  VALIDATE $? "creating app directory"
 
  curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
  VALIDATE $? "downloading backend code"
 
- cd /app
+ cd /app  &>>LOGFILE
  unzip /tmp/backend.zip
  VALIDATE $? "extracted backend code"
 
- npm install
+ npm install  &>>LOGFILE
  VALIDATE $? "installing npm dependencies"
 
- vim /etc/systemd/system/backend.service
- 
+ cp /home/ec2-user/shell-new/backend.service /etc/systemd/system/backend.service
+ VALIDATE $? "copied backend services"
+
+ systemctl daemon-reload
+ systemctl start backend
+ systemctl enable backend
+ VALIDATE $? "starting and enabling backend"
+
+
+ dnf install mysql -y &>>LOGFILE
+ VALIDATE $? "installing mysql client"
+
+ mysql -h techzena.online -uroot -p${mysql_root_password} < /app/schema/backend.sql
+ VALIDATE $? "schema loading"
+
+ systemctl restart backend  &>>LOGFILE
+ VALIDATE $? "restarting backend"
 
 
 
