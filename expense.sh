@@ -25,8 +25,13 @@ VALIDATE $? "installing MYSQL server"
 systemctl enable mysqld &>>$LOGFILE
 VALIDATE $? "enabling MYSQL server"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
-VALIDATE $? "setting up root password"
-
-
+# mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
+# VALIDATE $? "setting up root password"
+mysql -h techzena.com -uroot -p ExpenseApp@1 -e 'show databases;' &>>$LOGFILE
+if [ $? -ne 0 ]
+then
+  "mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE"
+else
+  echo "MYSQL Root password is already setup....$Y SKIPPING $N"
+fi
 
