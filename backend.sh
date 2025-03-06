@@ -41,8 +41,21 @@ VALIDATE(){
  else
   echo -e "expense user is alrady created.... $G SKIPPING $N"
  fi
- mkdir /
+ mkdir -p /app
  VALIDATE $? "creating app directory"
+
+ curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+ VALIDATE $? "downloading backend code"
+
+ cd /app
+ unzip /tmp/backend.zip
+ VALIDATE $? "extracted backend code"
+
+ npm install
+ VALIDATE $? "installing npm dependencies"
+
+ vim /etc/systemd/system/backend.service
+ 
 
 
 
