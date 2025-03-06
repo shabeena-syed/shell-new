@@ -6,6 +6,8 @@ LOGFILE=/tmp/$SCRIPT_NAME-$TIMESTAMP.log
 R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
+echo "please enter DB password:"
+read -s mysql_root_password
 
 if [ $1 -ne 0]
 then
@@ -27,10 +29,10 @@ VALIDATE $? "enabling MYSQL server"
 
 # mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
 # VALIDATE $? "setting up root password"
-mysql -h techzena.com -uroot -p ExpenseApp@1 -e 'show databases;' &>>$LOGFILE
+mysql -h techzena.com -uroot -p${mysql_root_password} -e 'show databases;' &>>$LOGFILE
 if [ $? -ne 0 ]
 then
-  "mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE"
+"mysql_secure_installation --set-root-pass ${mysql_root_password}  &>>$LOGFILE"
 else
   echo "MYSQL Root password is already setup....$Y SKIPPING $N"
 fi
