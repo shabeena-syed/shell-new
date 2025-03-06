@@ -34,4 +34,3 @@ then
 else
   echo "MYSQL Root password is already setup....$Y SKIPPING $N"
 fi
-
