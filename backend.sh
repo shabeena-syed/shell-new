@@ -17,6 +17,7 @@ fi
 VALIDATE(){
  if [ $1 -ne 0 ]   
   echo -e "$2 .... $R FAILURE $N"
+  Exit 1
  else
   echo -e "$2 ..... $RSUCCESS $N"
  fi
