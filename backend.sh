@@ -7,33 +7,34 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 
-if [ $USERID -ne 0 ]
-then 
+ if [ $USERID -ne 0 ]
+ then 
  echo "please run this script with root user"
   exit 1
-else
+ else
   echo "you are a root user"
-fi
+ fi
 VALIDATE(){
-if [ $1 -ne 0 ]   
-  echo -e "$2 .... $R FAILURE $N"
-  Exit 1
-else
-  echo -e "$2 ..... $RSUCCESS $N"
-fi
+ if [ $1 -ne 0 ]  
+ then 
+   echo -e "$2 .... $R FAILURE $N"
+   Exit 1
+ else
+  echo -e "$2 ..... $R SUCCESS $N"
+ fi
 }
 
-yum module disable nodejs -y &>>LOGFILE
-VALIDATE $? "disabling default nodejs"
+ yum module disable nodejs -y &>>LOGFILE
+ VALIDATE $? "disabling default nodejs"
 
-dnf module enable nodejs:20 -y &>>LOGFILE
-VALIDATE $? "enabling nodejs new version:20"
+ dnf module enable nodejs:20 -y &>>LOGFILE
+ VALIDATE $? "enabling nodejs new version:20"
 
-dnf install nodejs -y &>>LOGFILE
-VALIDATE $? "installing nodejs"
+ dnf install nodejs -y &>>LOGFILE
+ VALIDATE $? "installing nodejs"
 
-useradd expense
-VALIDATE $? "creating user expense"
+ useradd expense
+ VALIDATE $? "creating user expense"
 
 
 
