@@ -12,6 +12,9 @@ read -s mysql_root_password
 if [ $1 -ne 0]
 then
   echo -e " installing mysql is .... .$R FAILURE $N"
+else
+  echo -e "installing mysql is ...... $R success $N"
+fi
 
 if [ $USERID -ne 0 ]
 then 

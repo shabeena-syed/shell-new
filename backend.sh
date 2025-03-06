@@ -14,6 +14,13 @@ then
 else
   echo "you are a root user"
 fi
+VALIDATE(){
+ if [ $1 -ne 0 ]   
+  echo -e "$2 .... $R FAILURE $N"
+ else
+  echo -e "$2 ..... $RSUCCESS $N"
+ fi
+}
 
 yum module disable nodejs -y &>>LOGFILE
 VALIDATE $? "disabling default nodejs"
